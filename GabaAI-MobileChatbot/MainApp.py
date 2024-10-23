@@ -1,62 +1,51 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivymd.uix.list import TwoLineAvatarListItem, IconLeftWidget, ImageLeftWidget, ImageRightWidget
-from kivymd.uix.screen import Screen
-from kivymd.uix.datatables import MDDataTable
+from kivy.core.window import Window
 from kivy.metrics import dp
 
-list_helper = '''
-Screen:
-    ScrollView:
-        MDList:
-            id: container
+Window.size = (300, 500)
+
+screen_helper = '''
+MDNavigationLayout:
+    ScreenManager:
+        Screen:
+            BoxLayout:
+                orientation: 'vertical'
+                MDTopAppBar:
+                    title: 'GabAI Chatbot'      
+                    right_action_items: [['menu', lambda x: nav_drawer.set_state("toggle")]]      
+                    elevation: 2
+                Widget:
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        drawer_type: 'right'  # This ensures the drawer opens from the right side
+        size_hint_x: None
+        width: dp(250)  # Set the desired width here
+        radius: 0, dp(1), dp(1), 0
+        BoxLayout:
+            orientation: 'vertical'
+            MDList:
+                OneLineListItem:
+                    text: 'Item 1'
+                OneLineListItem:
+                    text: 'Item 2'
+                OneLineListItem:
+                    text: 'Item 3'
+            Widget: 
 '''
+
 class DemoApp(MDApp):
     def build(self):
-        screen = Screen()
-        facebook = TwoLineAvatarListItem(
-                ImageLeftWidget(
-                    source="img.png"
-                ),
-                text='Facebook',
-                secondary_text = 'Account',
-                pos_hint={'top': 1}
-            )
-        table = MDDataTable(pos_hint={'center_x':0.5, 'center_y':0.5},
-                            size_hint=(0.9, 0.6),
-                            check=True,
-                            rows_num=10,
-                            column_data=[
-                                ("No.", dp(18)),
-                                ("Food", dp(20)),
-                                ("Calories", dp(20)),
-                            ],
-                            row_data = [
-                                (1,"Burger","300"),
-                                (2,"Hotdog","150"),
-                                (3,"Donut","70"),
-                                (4,"French Fries","270"),
-                                (1, "Burger", "300"),
-                                (2, "Hotdog", "150"),
-                                (3, "Donut", "70"),
-                                (4, "French Fries", "270"),
-                                (4, "French Fries", "270"),
-                                (4, "French Fries", "270"),
-                            ]
-                            )
-        table.bind(on_check_press=self.check_press)
-        table.bind(on_row_press=self.row_press)
-
-        screen.add_widget(facebook)
-        screen.add_widget(table)
-
+        self.theme_cls.primary_palette = 'Indigo'
+        self.theme_cls.primary_hue = '900'
+        screen = Builder.load_string(screen_helper)
         return screen
 
+    def navigation_draw(self):
+        print('Navigation')
 
-    def check_press(self, instance_table,current_row):
-        print(instance_table,current_row)
-    def row_press(self, instance_table,instance_row):
-        print(instance_table,instance_row)
-
+    def account_draw(self):
+        print('User Account')
 
 DemoApp().run()
