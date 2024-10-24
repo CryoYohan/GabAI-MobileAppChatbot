@@ -1,5 +1,7 @@
 screen_helper = '''
 ScreenManager:
+    id: screen_manager
+    LoginScreen:
     MenuScreen:
         MDNavigationLayout:
             ScreenManager:
@@ -13,9 +15,9 @@ ScreenManager:
                         Widget:
             MDNavigationDrawer:
                 id: nav_drawer
-                drawer_type: 'right'  # This ensures the drawer opens from the right side
+                drawer_type: 'right'
                 size_hint_x: None
-                width: dp(250)  # Set the desired width here
+                width: dp(250)
                 radius: 0, dp(1), dp(1), 0
                 BoxLayout:
                     orientation: 'vertical'
@@ -23,36 +25,69 @@ ScreenManager:
                     padding: '8dp'                   
                     Image:
                         source: 'profile_pic.jpg'
-                        halign:'left'
+                        halign: 'left'
                     MDLabel:
                         text: 'Cyril John Ypil'
                         font_style: 'Subtitle1'
                         size_hint_y: None
                         height: self.texture_size[1]
-                                            
                     MDLabel:
                         text: 'cyrilypil@gmail.com'
                         font_style: 'Caption'
                         size_hint_y: None
                         height: self.texture_size[1]
-                        
                     MDList:
                         OneLineIconListItem:
+                            on_release: screen_manager.current = 'profile'
                             text: 'Profile'
                             IconLeftWidget:
-                                icon:'face-man-profile'
+                                icon: 'face-man-profile'
                         OneLineIconListItem:
                             text: 'Settings'
                             IconLeftWidget:
-                                icon:'account-settings'
+                                icon: 'account-settings'
                         OneLineIconListItem:
+                            on_release: screen_manager.current = 'login'
                             text: 'Logout'
                             IconLeftWidget:
-                                icon:'logout'
-                                
-                    Widget: 
+                                icon: 'logout'
+                    Widget:
     ProfileScreen:
     ChatbotScreen:
+
+<LoginScreen>:
+    name: 'login'
+    Image:
+        source: 'img_3.png'
+        halign: "center"  # Center the text
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+    MDLabel:
+        text: "GabAi"
+        font_style: "H4"  # Large header font size
+        halign: "center"  # Center the text
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.primary_dark
+    MDTextField:
+        mode: "rectangle"
+        hint_text: "Password"
+        helper_text_mode: "persistent"
+        password: True
+        width: dp(10)
+        pos_hint: {'center_x':0.5, 'center_y': 0.3}
+    MDTextField:
+        mode: "rectangle"
+        hint_text: "IDNO"
+        helper_text_mode: "persistent"
+        width: dp(10)
+        pos_hint: {'center_x':0.5, 'center_y': 0.5}
+    
+    MDRoundFlatButton:
+        style:'filled'
+        text: 'Login'
+        pos_hint: {'center_x':0.5, 'center_y': 0.2}
+        on_press: root.manager.current = 'menu'
+
 <MenuScreen>:
     name: 'menu'
     MDRoundFlatButton:
@@ -64,7 +99,7 @@ ScreenManager:
         pos_hint: {'center_x':0.5, 'center_y': 0.6}
         on_press: root.manager.current = 'chatbot'
 
-<ProfileScreen>
+<ProfileScreen>:
     name: 'profile'
     MDLabel:
         text: 'Welcome Cyril!'
@@ -74,15 +109,20 @@ ScreenManager:
         pos_hint: {'center_x':0.5, 'center_y': 0.2}
         on_press: root.manager.current = 'menu'
 
-<ChatbotScreen>
+<ChatbotScreen>:
     name: 'chatbot'
     MDLabel:
         text: 'Ask GabAI anything...'
         halign: 'center'
+    MDTextField:
+        mode: "rectangle"
+        hint_text: "Ask GabAi"
+        helper_text: "Say hi to Gab!"
+        helper_text_mode: "persistent"
+        icon_right: "send"
+        pos_hint: {'center_x':0.5, 'center_y': 0.2}
     MDRoundFlatButton:
         text: 'Back'
-        pos_hint: {'center_x':0.5, 'center_y': 0.2}
+        pos_hint: {'center_x':0.8, 'center_y': 0.9}
         on_press: root.manager.current = 'menu'
-
-
 '''

@@ -13,11 +13,8 @@ class ProfileScreen(Screen):
     pass
 class ChatbotScreen(Screen):
     pass
-
-sm = ScreenManager()
-sm.add_widget(MenuScreen(name='menu'))
-sm.add_widget(ProfileScreen(name='profile'))
-sm.add_widget(ChatbotScreen(name='chatbot'))
+class LoginScreen(Screen):
+    pass
 
 class DemoApp(MDApp):
     def build(self):
