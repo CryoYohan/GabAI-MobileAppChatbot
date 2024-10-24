@@ -1,39 +1,23 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.metrics import dp
+from kivymd.uix.screen import Screen
+from kivymd.uix.screenmanager import ScreenManager
+from screen_nav import screen_helper
 
 Window.size = (300, 500)
 
-screen_helper = '''
-MDNavigationLayout:
-    ScreenManager:
-        Screen:
-            BoxLayout:
-                orientation: 'vertical'
-                MDTopAppBar:
-                    title: 'GabAI Chatbot'      
-                    right_action_items: [['menu', lambda x: nav_drawer.set_state("toggle")]]      
-                    elevation: 2
-                Widget:
+class MenuScreen(Screen):
+    pass
+class ProfileScreen(Screen):
+    pass
+class ChatbotScreen(Screen):
+    pass
 
-    MDNavigationDrawer:
-        id: nav_drawer
-        drawer_type: 'right'  # This ensures the drawer opens from the right side
-        size_hint_x: None
-        width: dp(250)  # Set the desired width here
-        radius: 0, dp(1), dp(1), 0
-        BoxLayout:
-            orientation: 'vertical'
-            MDList:
-                OneLineListItem:
-                    text: 'Item 1'
-                OneLineListItem:
-                    text: 'Item 2'
-                OneLineListItem:
-                    text: 'Item 3'
-            Widget: 
-'''
+sm = ScreenManager()
+sm.add_widget(MenuScreen(name='menu'))
+sm.add_widget(ProfileScreen(name='profile'))
+sm.add_widget(ChatbotScreen(name='chatbot'))
 
 class DemoApp(MDApp):
     def build(self):
