@@ -1,2 +1,2 @@
 # GabAI-MobileAppChatbot
-An AI-integrated mobile chatbot study for our research using KivyMD and Python.
+An mobile application chatbot study for our research/project management project utilizing KivyMD and Kivy for the Front-end mobile app development for a sleek and modern design and Python for the backend. This project will have the oppurtunity to have an AI-integrated in the chatbot using NLP's algorithms, which is still in development and to be tested whether which model suits best for our mobile chatbot.
