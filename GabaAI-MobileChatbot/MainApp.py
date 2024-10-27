@@ -23,6 +23,20 @@ class DemoApp(MDApp):
         screen = Builder.load_string(screen_helper)
         return screen
 
+    def login(self, idno, password):
+        print(f'IDNO: {idno}, Password: {password}')
+        if idno == 'admin' and password =='user':
+            self.root.current = 'menu'
+
+    def toggle_password_visibility(self, text_field, icon_button):
+        # Toggle the password visibility
+        if text_field.password:
+            text_field.password = False  # Show password
+            icon_button.icon = "eye"  # Change icon to "eye"
+        else:
+            text_field.password = True  # Hide password
+            icon_button.icon = "eye-off"  # Change icon to "eye-off"
+
     def navigation_draw(self):
         print('Navigation')
 

@@ -59,34 +59,45 @@ ScreenManager:
     name: 'login'
     Image:
         source: 'img_3.png'
-        halign: "center"  # Center the text
+        halign: "center"
         pos_hint: {'center_x': 0.5, 'center_y': 0.8}
     MDLabel:
         text: "GabAi"
-        font_style: "H4"  # Large header font size
-        halign: "center"  # Center the text
-        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        font_style: "H4"
+        halign: "center"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.54}
         theme_text_color: "Custom"
         text_color: app.theme_cls.primary_dark
     MDTextField:
+        id: idno_field
+        mode: "rectangle"
+        hint_text: "IDNO"
+        helper_text_mode: "persistent"
+        size_hint_x: 0.69
+        pos_hint: {'center_x': 0.5, 'center_y': 0.42}
+        
+    MDTextField:
+        id: password_field
         mode: "rectangle"
         hint_text: "Password"
         helper_text_mode: "persistent"
         password: True
-        width: dp(10)
-        pos_hint: {'center_x':0.5, 'center_y': 0.3}
-    MDTextField:
-        mode: "rectangle"
-        hint_text: "IDNO"
-        helper_text_mode: "persistent"
-        width: dp(10)
-        pos_hint: {'center_x':0.5, 'center_y': 0.5}
+        size_hint_x: 0.69
+        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
     
-    MDRoundFlatButton:
-        style:'filled'
+    MDFillRoundFlatButton:
+        style: 'elevated'
         text: 'Login'
-        pos_hint: {'center_x':0.5, 'center_y': 0.2}
-        on_press: root.manager.current = 'menu'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.18}
+        size_hint_x: 0.5
+        on_press: app.login(idno_field.text, password_field.text)
+
+    FloatLayout:
+        MDIconButton:
+            icon: "eye-off"
+            pos_hint: {"x": .65, "y": .24}
+            on_release: app.toggle_password_visibility(password_field, self)
+
 
 <MenuScreen>:
     name: 'menu'
